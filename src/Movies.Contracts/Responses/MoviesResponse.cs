@@ -2,6 +2,6 @@
 {
     public class MoviesResponse
     {
-        public required IEnumerable<MoviesResponse> Items { get; init; } = [];
+        public required IEnumerable<MovieResponse> Items { get; init; } = [];
     }
 }
