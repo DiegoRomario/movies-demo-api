@@ -8,9 +8,14 @@ public interface IDbConnectionFactory
     Task<IDbConnection> CreateConnectionAsync(CancellationToken token = default);
 }
 
-public class NpgsqlConnectionFactory(string connectionString) : IDbConnectionFactory
+public class NpgsqlConnectionFactory : IDbConnectionFactory
 {
-    private readonly string _connectionString = connectionString;
+    private readonly string _connectionString;
+
+    public NpgsqlConnectionFactory(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
 
     public async Task<IDbConnection> CreateConnectionAsync(CancellationToken token = default)
     {

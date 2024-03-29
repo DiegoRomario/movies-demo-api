@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Contracts", "src\Mov
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Api", "src\Movies.Api\Movies.Api.csproj", "{02B01041-2081-4648-A424-3E90AD9D20D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Api", "src\Identity.Api\Identity.Api.csproj", "{76452152-7715-44BF-B4DE-8774A7B02458}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "src\Identity.Api\Identity.Api.csproj", "{76452152-7715-44BF-B4DE-8774A7B02458}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
