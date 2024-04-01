@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Api", "src\Movies.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "src\Identity.Api\Identity.Api.csproj", "{76452152-7715-44BF-B4DE-8774A7B02458}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Api.Sdk", "src\Movies.Api.Sdk\Movies.Api.Sdk.csproj", "{FFF3A761-C2EE-4C79-9FDB-392160084AF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Api.Sdk.Consumer", "src\Movies.Api.Sdk.Consumer\Movies.Api.Sdk.Consumer.csproj", "{8969A434-7B9D-4DAB-8F22-11E70ABA563E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{76452152-7715-44BF-B4DE-8774A7B02458}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76452152-7715-44BF-B4DE-8774A7B02458}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76452152-7715-44BF-B4DE-8774A7B02458}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFF3A761-C2EE-4C79-9FDB-392160084AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFF3A761-C2EE-4C79-9FDB-392160084AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFF3A761-C2EE-4C79-9FDB-392160084AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFF3A761-C2EE-4C79-9FDB-392160084AF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8969A434-7B9D-4DAB-8F22-11E70ABA563E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8969A434-7B9D-4DAB-8F22-11E70ABA563E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8969A434-7B9D-4DAB-8F22-11E70ABA563E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8969A434-7B9D-4DAB-8F22-11E70ABA563E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
