@@ -16,7 +16,7 @@ public static class ContractMapping
             Genres = request.Genres.ToList()
         };
     }
-
+    
     public static Movie MapToMovie(this UpdateMovieRequest request, Guid id)
     {
         return new Movie
@@ -53,7 +53,7 @@ public static class ContractMapping
             Total = totalCount
         };
     }
-
+    
     public static IEnumerable<MovieRatingResponse> MapToResponse(this IEnumerable<MovieRating> ratings)
     {
         return ratings.Select(x => new MovieRatingResponse
@@ -73,8 +73,8 @@ public static class ContractMapping
             SortField = request.SortBy?.Trim('+', '-'),
             SortOrder = request.SortBy is null ? SortOrder.Unsorted :
                 request.SortBy.StartsWith('-') ? SortOrder.Descending : SortOrder.Ascending,
-            Page = request.Page.Value,
-            PageSize = request.PageSize.Value
+            Page = request.Page.GetValueOrDefault(PagedRequest.DefaultPage),
+            PageSize = request.PageSize.GetValueOrDefault(PagedRequest.DefaultPageSize)
         };
     }
 
