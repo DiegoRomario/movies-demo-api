@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.OutputCaching;
-using Movies.Api.Auth;
-using Movies.Api.Mapping;
 using Movies.Application.Services;
+using Movies.Minimal.Api;
+using Movies.Minimal.Api.Auth;
 
-namespace Movies.Api.Endpoints.Movies;
+namespace Movies.Minimal.Api.Endpoints.Movies;
 
 public static class DeleteMovieEndpoint
 {

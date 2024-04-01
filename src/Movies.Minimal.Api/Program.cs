@@ -1,16 +1,15 @@
 using System.Text;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Movies.Api.Auth;
-using Movies.Api.Endpoints;
-using Movies.Api.Health;
-using Movies.Api.Mapping;
-using Movies.Api.Swagger;
 using Movies.Application;
 using Movies.Application.Database;
+using Movies.Minimal.Api.Auth;
+using Movies.Minimal.Api.Endpoints;
+using Movies.Minimal.Api.Health;
+using Movies.Minimal.Api.Mapping;
+using Movies.Minimal.Api.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,19 +35,11 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
-builder.Services.AddAuthorization(x =>
-{
-    // x.AddPolicy(AuthConstants.AdminUserPolicyName, 
-    //     p => p.RequireClaim(AuthConstants.AdminUserClaimName, "true"));
-
-    x.AddPolicy(AuthConstants.AdminUserPolicyName,
-        p => p.AddRequirements(new AdminAuthRequirement(config["ApiKey"]!)));
-
-    x.AddPolicy(AuthConstants.TrustedMemberPolicyName,
-    p => p.RequireAssertion(c =>
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy(AuthConstants.AdminUserPolicyName, p => p.AddRequirements(new AdminAuthRequirement(config["ApiKey"]!)))
+    .AddPolicy(AuthConstants.TrustedMemberPolicyName, p => p.RequireAssertion(c =>
             c.User.HasClaim(m => m is { Type: AuthConstants.AdminUserClaimName, Value: "true" }) ||
             c.User.HasClaim(m => m is { Type: AuthConstants.TrustedMemberClaimName, Value: "true" })));
-});
 
 builder.Services.AddScoped<ApiKeyAuthFilter>();
 
@@ -60,7 +51,6 @@ builder.Services.AddApiVersioning(x =>
     x.ApiVersionReader = new MediaTypeApiVersionReader("api-version");
 }).AddApiExplorer();
 
-
 builder.Services.AddEndpointsApiExplorer();
 
 //builder.Services.AddResponseCaching();
@@ -70,7 +60,7 @@ builder.Services.AddOutputCache(x =>
     x.AddPolicy("MovieCache", c =>
         c.Cache()
         .Expire(TimeSpan.FromMinutes(1))
-        .SetVaryByQuery(new[] { "title", "year", "sortBy", "page", "pageSize" })
+        .SetVaryByQuery(["title", "year", "sortBy", "page", "pageSize"])
         .Tag("movies"));
 });
 

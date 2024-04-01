@@ -12,16 +12,10 @@ namespace Movies.Api.Controllers;
 
 [ApiController]
 [ApiVersion(1.0)]
-public class MoviesController : ControllerBase
+public class MoviesController(IMovieService movieService, IOutputCacheStore outputCacheStore) : ControllerBase
 {
-    private readonly IMovieService _movieService;
-    private readonly IOutputCacheStore _outputCacheStore;
-
-    public MoviesController(IMovieService movieService, IOutputCacheStore outputCacheStore)
-    {
-        _movieService = movieService;
-        _outputCacheStore = outputCacheStore;
-    }
+    private readonly IMovieService _movieService = movieService;
+    private readonly IOutputCacheStore _outputCacheStore = outputCacheStore;
 
     [Authorize(AuthConstants.TrustedMemberPolicyName)]
     [HttpPost(ApiEndpoints.Movies.Create)]
@@ -44,6 +38,27 @@ public class MoviesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetV1([FromRoute] string idOrSlug,
         CancellationToken token)
+    {
+        var userId = HttpContext.GetUserId();
+
+        var movie = Guid.TryParse(idOrSlug, out var id)
+            ? await _movieService.GetByIdAsync(id, userId, token)
+            : await _movieService.GetBySlugAsync(idOrSlug, userId, token);
+        if (movie is null)
+        {
+            return NotFound();
+        }
+
+        var response = movie.MapToResponse();
+        return Ok(response);
+    }
+
+    [ApiVersion(2.0)]
+    [HttpGet(ApiEndpoints.Movies.Get)]
+    [ProducesResponseType(typeof(MovieResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetV2([FromRoute] string idOrSlug,
+    CancellationToken token)
     {
         var userId = HttpContext.GetUserId();
 

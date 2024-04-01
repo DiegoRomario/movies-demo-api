@@ -1,7 +1,7 @@
-﻿using Movies.Api.Endpoints.Movies;
-using Movies.Api.Endpoints.Ratings;
+﻿using Movies.Minimal.Api.Endpoints.Movies;
+using Movies.Minimal.Api.Endpoints.Ratings;
 
-namespace Movies.Api.Endpoints;
+namespace Movies.Minimal.Api.Endpoints;
 
 public static class EndpointsExtensions
 {

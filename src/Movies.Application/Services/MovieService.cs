@@ -4,20 +4,12 @@ using Movies.Application.Repositories;
 
 namespace Movies.Application.Services;
 
-public class MovieService : IMovieService
+public class MovieService(IMovieRepository movieRepository, IValidator<Movie> movieValidator, IRatingRepository ratingRepository, IValidator<GetAllMoviesOptions> optionsValidator) : IMovieService
 {
-    private readonly IMovieRepository _movieRepository;
-    private readonly IValidator<Movie> _movieValidator;
-    private readonly IRatingRepository _ratingRepository;
-    private readonly IValidator<GetAllMoviesOptions> _optionsValidator;
-
-    public MovieService(IMovieRepository movieRepository, IValidator<Movie> movieValidator, IRatingRepository ratingRepository, IValidator<GetAllMoviesOptions> optionsValidator)
-    {
-        _movieRepository = movieRepository;
-        _movieValidator = movieValidator;
-        _ratingRepository = ratingRepository;
-        _optionsValidator = optionsValidator;
-    }
+    private readonly IMovieRepository _movieRepository = movieRepository;
+    private readonly IValidator<Movie> _movieValidator = movieValidator;
+    private readonly IRatingRepository _ratingRepository = ratingRepository;
+    private readonly IValidator<GetAllMoviesOptions> _optionsValidator = optionsValidator;
 
     public async Task<bool> CreateAsync(Movie movie, CancellationToken token = default)
     {
@@ -38,7 +30,7 @@ public class MovieService : IMovieService
     public async Task<IEnumerable<Movie>> GetAllAsync(GetAllMoviesOptions options, CancellationToken token = default)
     {
         await _optionsValidator.ValidateAndThrowAsync(options, token);
-        
+
         return await _movieRepository.GetAllAsync(options, token);
     }
 
@@ -59,10 +51,10 @@ public class MovieService : IMovieService
             movie.Rating = rating;
             return movie;
         }
-        
-        var ratings = await _ratingRepository.GetRatingAsync(movie.Id, userid.Value, token);
-        movie.Rating = ratings.Rating;
-        movie.UserRating = ratings.UserRating;
+
+        var (Rating, UserRating) = await _ratingRepository.GetRatingAsync(movie.Id, userid.Value, token);
+        movie.Rating = Rating;
+        movie.UserRating = UserRating;
         return movie;
     }
 

@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning.Builder;
 using Asp.Versioning.Conventions;
 
-namespace Movies.Api.Endpoints;
+namespace Movies.Minimal.Api.Endpoints;
 
 public static class ApiVersioning
 {

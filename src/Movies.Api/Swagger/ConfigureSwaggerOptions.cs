@@ -5,16 +5,10 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Movies.Api.Swagger;
 
-public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
+public class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider, IHostEnvironment environment) : IConfigureOptions<SwaggerGenOptions>
 {
-    private readonly IApiVersionDescriptionProvider _provider;
-    private readonly IHostEnvironment _environment;
-
-    public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider, IHostEnvironment environment)
-    {
-        _provider = provider;
-        _environment = environment;
-    }
+    private readonly IApiVersionDescriptionProvider _provider = provider;
+    private readonly IHostEnvironment _environment = environment;
 
     public void Configure(SwaggerGenOptions options)
     {
@@ -28,7 +22,7 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
                     Version = description.ApiVersion.ToString(),
                 });
         }
-        
+
         options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
         {
             In = ParameterLocation.Header,
@@ -38,7 +32,7 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
             BearerFormat = "JWT",
             Scheme = "Bearer"
         });
-        
+
         options.AddSecurityRequirement(new OpenApiSecurityRequirement
         {
             {

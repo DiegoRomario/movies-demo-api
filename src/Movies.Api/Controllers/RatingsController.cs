@@ -11,14 +11,9 @@ namespace Movies.Api.Controllers;
 
 [ApiController]
 [ApiVersion(1.0)]
-public class RatingsController : ControllerBase
+public class RatingsController(IRatingService ratingService) : ControllerBase
 {
-    private readonly IRatingService _ratingService;
-
-    public RatingsController(IRatingService ratingService)
-    {
-        _ratingService = ratingService;
-    }
+    private readonly IRatingService _ratingService = ratingService;
 
     [Authorize]
     [HttpPut(ApiEndpoints.Movies.Rate)]

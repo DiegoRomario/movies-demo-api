@@ -3,16 +3,11 @@ using System.Net.Http.Json;
 
 namespace Movies.Api.Sdk.Consumer;
 
-public class AuthTokenProvider
+public class AuthTokenProvider(HttpClient httpClient)
 {
-    private readonly HttpClient _httpClient;
+    private readonly HttpClient _httpClient = httpClient;
     private string _cachedToken = string.Empty;
     private static readonly SemaphoreSlim Lock = new(1, 1);
-
-    public AuthTokenProvider(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
 
     public async Task<string> GetTokenAsync()
     {

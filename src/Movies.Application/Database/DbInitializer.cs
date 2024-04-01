@@ -2,14 +2,9 @@
 
 namespace Movies.Application.Database;
 
-public class DbInitializer
+public class DbInitializer(IDbConnectionFactory dbConnectionFactory)
 {
-    private readonly IDbConnectionFactory _dbConnectionFactory;
-
-    public DbInitializer(IDbConnectionFactory dbConnectionFactory)
-    {
-        _dbConnectionFactory = dbConnectionFactory;
-    }
+    private readonly IDbConnectionFactory _dbConnectionFactory = dbConnectionFactory;
 
     public async Task InitializeAsync()
     {
@@ -22,19 +17,19 @@ public class DbInitializer
             title TEXT not null,
             yearofrelease integer not null);
         """);
-        
+
         await connection.ExecuteAsync("""
             create unique index concurrently if not exists movies_slug_idx
             on movies
             using btree(slug);
         """);
-        
+
         await connection.ExecuteAsync("""
             create table if not exists genres (
             movieId UUID references movies (Id),
             name TEXT not null);
         """);
-        
+
         await connection.ExecuteAsync("""
             create table if not exists ratings (
             userid uuid,

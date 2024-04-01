@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Movies.Api.Swagger;
+namespace Movies.Minimal.Api.Swagger;
 
 public class SwaggerDefaultValues : IOperationFilter
 {
@@ -41,9 +41,9 @@ public class SwaggerDefaultValues : IOperationFilter
 
             parameter.Description ??= description.ModelMetadata.Description;
 
-            if (parameter.Schema.Default == null 
+            if (parameter.Schema.Default == null
                 && description.DefaultValue != null
-                && description.DefaultValue is not DBNull 
+                && description.DefaultValue is not DBNull
                 && description.ModelMetadata is { } modelMetadata)
             {
                 var json = JsonSerializer.Serialize(

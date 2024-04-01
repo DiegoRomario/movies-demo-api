@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Api.Sdk", "src\Movie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Api.Sdk.Consumer", "src\Movies.Api.Sdk.Consumer\Movies.Api.Sdk.Consumer.csproj", "{8969A434-7B9D-4DAB-8F22-11E70ABA563E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Minimal.Api", "src\Movies.Minimal.Api\Movies.Minimal.Api.csproj", "{1DCBF48D-6894-4737-BE2B-208D07169CC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Minimal.Api", "src\Movies.Minimal.Api\Movies.Minimal.Api.csproj", "{1DCBF48D-6894-4737-BE2B-208D07169CC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

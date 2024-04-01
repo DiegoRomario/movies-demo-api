@@ -6,5 +6,5 @@ public class TokenGenerationRequest
 
     public string Email { get; set; }
 
-    public Dictionary<string, object> CustomClaims { get; set; } = new();
+    public Dictionary<string, object> CustomClaims { get; set; } = [];
 }

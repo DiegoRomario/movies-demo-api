@@ -1,16 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Movies.Api.Auth;
+namespace Movies.Minimal.Api.Auth;
 
-public class ApiKeyAuthFilter : IAuthorizationFilter
+public class ApiKeyAuthFilter(IConfiguration configuration) : IAuthorizationFilter
 {
-    private readonly IConfiguration _configuration;
-
-    public ApiKeyAuthFilter(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
+    private readonly IConfiguration _configuration = configuration;
 
     public void OnAuthorization(AuthorizationFilterContext context)
     {

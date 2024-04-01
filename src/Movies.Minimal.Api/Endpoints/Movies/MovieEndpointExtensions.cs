@@ -1,4 +1,6 @@
-﻿namespace Movies.Api.Endpoints.Movies;
+﻿using Movies.Api.Endpoints.Movies;
+
+namespace Movies.Minimal.Api.Endpoints.Movies;
 
 public static class MovieEndpointExtensions
 {
@@ -9,7 +11,7 @@ public static class MovieEndpointExtensions
         app.MapGetAllMovies();
         app.MapUpdateMovie();
         app.MapDeleteMovie();
-        
+
         return app;
     }
 }

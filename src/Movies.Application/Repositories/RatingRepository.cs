@@ -4,14 +4,9 @@ using Movies.Application.Models;
 
 namespace Movies.Application.Repositories;
 
-public class RatingRepository : IRatingRepository
+public class RatingRepository(IDbConnectionFactory dbConnectionFactory) : IRatingRepository
 {
-    private readonly IDbConnectionFactory _dbConnectionFactory;
-
-    public RatingRepository(IDbConnectionFactory dbConnectionFactory)
-    {
-        _dbConnectionFactory = dbConnectionFactory;
-    }
+    private readonly IDbConnectionFactory _dbConnectionFactory = dbConnectionFactory;
 
     public async Task<bool> RateMovieAsync(Guid movieId, int rating, Guid userId, CancellationToken token = default)
     {

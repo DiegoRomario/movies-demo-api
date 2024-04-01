@@ -1,12 +1,13 @@
-﻿using Movies.Api.Auth;
-using Movies.Application.Services;
+﻿using Movies.Application.Services;
+using Movies.Minimal.Api;
+using Movies.Minimal.Api.Auth;
 
-namespace Movies.Api.Endpoints.Ratings;
+namespace Movies.Minimal.Api.Endpoints.Ratings;
 
 public static class DeleteRatingEndpoint
 {
     public const string Name = "DeleteRating";
-    
+
     public static IEndpointRouteBuilder MapDeleteRating(this IEndpointRouteBuilder app)
     {
         app.MapDelete(ApiEndpoints.Movies.DeleteRating,
@@ -21,7 +22,7 @@ public static class DeleteRatingEndpoint
             .Produces(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
             .RequireAuthorization();
-        
+
         return app;
     }
 }

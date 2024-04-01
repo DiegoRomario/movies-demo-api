@@ -1,12 +1,9 @@
-﻿
-using System.Text.Json;
+﻿using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Movies.Api.Sdk;
 using Movies.Api.Sdk.Consumer;
 using Movies.Contracts.Requests;
 using Refit;
-
-//var moviesApi = RestService.For<IMoviesApi>("https://localhost:5001");
 
 var services = new ServiceCollection();
 
@@ -30,14 +27,14 @@ var newMovie = await moviesApi.CreateMovieAsync(new CreateMovieRequest
 {
     Title = "Spiderman 2",
     YearOfRelease = 2002,
-    Genres = new[] { "Action" }
+    Genres = ["Action"]
 });
 
 await moviesApi.UpdateMovieAsync(newMovie.Id, new UpdateMovieRequest()
 {
     Title = "Spiderman 2",
     YearOfRelease = 2002,
-    Genres = new[] { "Action", "Adventure" }
+    Genres = ["Action", "Adventure"]
 });
 
 await moviesApi.DeleteMovieAsync(newMovie.Id);

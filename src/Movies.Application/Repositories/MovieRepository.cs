@@ -1,17 +1,13 @@
 ﻿using Dapper;
 using Movies.Application.Database;
 using Movies.Application.Models;
+using Movies.Application.Models.Enumerators;
 
 namespace Movies.Application.Repositories;
 
-public class MovieRepository : IMovieRepository
+public class MovieRepository(IDbConnectionFactory dbConnectionFactory) : IMovieRepository
 {
-    private readonly IDbConnectionFactory _dbConnectionFactory;
-
-    public MovieRepository(IDbConnectionFactory dbConnectionFactory)
-    {
-        _dbConnectionFactory = dbConnectionFactory;
-    }
+    private readonly IDbConnectionFactory _dbConnectionFactory = dbConnectionFactory;
 
     public async Task<bool> CreateAsync(Movie movie, CancellationToken token = default)
     {

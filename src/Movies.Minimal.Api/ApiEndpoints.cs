@@ -1,9 +1,9 @@
-﻿namespace Movies.Api;
+﻿namespace Movies.Minimal.Api;
 
 public static class ApiEndpoints
 {
     private const string ApiBase = "api";
-    
+
     public static class Movies
     {
         private const string Base = $"{ApiBase}/movies";
@@ -17,7 +17,7 @@ public static class ApiEndpoints
         public const string Rate = $"{Base}/{{id:guid}}/ratings";
         public const string DeleteRating = $"{Base}/{{id:guid}}/ratings";
     }
-    
+
     public static class Ratings
     {
         private const string Base = $"{ApiBase}/ratings";

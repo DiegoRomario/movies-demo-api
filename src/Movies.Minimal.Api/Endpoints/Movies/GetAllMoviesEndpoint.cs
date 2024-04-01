@@ -1,8 +1,10 @@
-﻿using Movies.Api.Auth;
-using Movies.Api.Mapping;
-using Movies.Application.Services;
+﻿using Movies.Application.Services;
 using Movies.Contracts.Requests;
 using Movies.Contracts.Responses;
+using Movies.Minimal.Api;
+using Movies.Minimal.Api.Auth;
+using Movies.Minimal.Api.Endpoints;
+using Movies.Minimal.Api.Mapping;
 
 namespace Movies.Api.Endpoints.Movies;
 
@@ -12,25 +14,25 @@ public static class GetAllMoviesEndpoint
 
     public static IEndpointRouteBuilder MapGetAllMovies(this IEndpointRouteBuilder app)
     {
-        //app.MapGet(ApiEndpoints.Movies.GetAll, async (
-        //        [AsParameters] GetAllMoviesRequest request, IMovieService movieService,
-        //        HttpContext context, CancellationToken token) =>
-        //    {
-        //        var userId = context.GetUserId();
-        //        var options = request.MapToOptions()
-        //            .WithUser(userId);
-        //        var movies = await movieService.GetAllAsync(options, token);
-        //        var movieCount = await movieService.GetCountAsync(options.Title, options.YearOfRelease, token);
-        //        var moviesResponse = movies.MapToResponse(
-        //            request.Page.GetValueOrDefault(PagedRequest.DefaultPage),
-        //            request.PageSize.GetValueOrDefault(PagedRequest.DefaultPageSize),
-        //            movieCount);
-        //        return TypedResults.Ok(moviesResponse);
-        //    })
-        //    .WithName($"{Name}V1")
-        //    .Produces<MoviesResponse>(StatusCodes.Status200OK)
-        //    .WithApiVersionSet(ApiVersioning.VersionSet)
-        //    .HasApiVersion(1.0);
+        app.MapGet(ApiEndpoints.Movies.GetAll, async (
+                [AsParameters] GetAllMoviesRequest request, IMovieService movieService,
+                HttpContext context, CancellationToken token) =>
+            {
+                var userId = context.GetUserId();
+                var options = request.MapToOptions()
+                                     .WithUser(userId);
+                var movies = await movieService.GetAllAsync(options, token);
+                var movieCount = await movieService.GetCountAsync(options.Title, options.YearOfRelease, token);
+                var moviesResponse = movies.MapToResponse(
+                    request.Page.GetValueOrDefault(PagedRequest.DefaultPage),
+                    request.PageSize.GetValueOrDefault(PagedRequest.DefaultPageSize),
+                    movieCount);
+                return TypedResults.Ok(moviesResponse);
+            })
+            .WithName($"{Name}V1")
+            .Produces<MoviesResponse>(StatusCodes.Status200OK)
+            .WithApiVersionSet(ApiVersioning.VersionSet)
+            .HasApiVersion(1.0);
 
         app.MapGet(ApiEndpoints.Movies.GetAll, async (
                 [AsParameters] GetAllMoviesRequest request, IMovieService movieService,
@@ -38,7 +40,7 @@ public static class GetAllMoviesEndpoint
             {
                 var userId = context.GetUserId();
                 var options = request.MapToOptions()
-                    .WithUser(userId);
+                                     .WithUser(userId);
                 var movies = await movieService.GetAllAsync(options, token);
                 var movieCount = await movieService.GetCountAsync(options.Title, options.YearOfRelease, token);
                 var moviesResponse = movies.MapToResponse(
@@ -49,8 +51,8 @@ public static class GetAllMoviesEndpoint
             })
             .WithName($"{Name}V2")
             .Produces<MoviesResponse>(StatusCodes.Status200OK)
-            //.WithApiVersionSet(ApiVersioning.VersionSet)
-            //.HasApiVersion(2.0)
+            .WithApiVersionSet(ApiVersioning.VersionSet)
+            .HasApiVersion(2.0)
             .CacheOutput("MovieCache");
         return app;
     }

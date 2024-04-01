@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Movies.Application.Database;
 
-namespace Movies.Api.Health;
+namespace Movies.Minimal.Api.Health;
 
 public class DatabaseHealthCheck : IHealthCheck
 {
     public const string Name = "Database";
-    
+
     private readonly IDbConnectionFactory _dbConnectionFactory;
     private readonly ILogger<DatabaseHealthCheck> _logger;
 

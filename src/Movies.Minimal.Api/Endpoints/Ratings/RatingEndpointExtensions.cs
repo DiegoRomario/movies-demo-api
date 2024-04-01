@@ -1,4 +1,4 @@
-﻿namespace Movies.Api.Endpoints.Ratings;
+﻿namespace Movies.Minimal.Api.Endpoints.Ratings;
 
 public static class RatingEndpointExtensions
 {

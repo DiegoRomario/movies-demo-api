@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
 using Movies.Contracts.Responses;
 
-namespace Movies.Api.Mapping;
+namespace Movies.Minimal.Api.Mapping;
 
-public class ValidationMappingMiddleware
+public class ValidationMappingMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate _next;
-
-    public ValidationMappingMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
+    private readonly RequestDelegate _next = next;
 
     public async Task InvokeAsync(HttpContext context)
     {

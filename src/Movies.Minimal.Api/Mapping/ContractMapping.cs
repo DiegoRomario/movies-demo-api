@@ -1,8 +1,9 @@
 ﻿using Movies.Application.Models;
+using Movies.Application.Models.Enumerators;
 using Movies.Contracts.Requests;
 using Movies.Contracts.Responses;
 
-namespace Movies.Api.Mapping;
+namespace Movies.Minimal.Api.Mapping;
 
 public static class ContractMapping
 {
@@ -16,7 +17,7 @@ public static class ContractMapping
             Genres = request.Genres.ToList()
         };
     }
-    
+
     public static Movie MapToMovie(this UpdateMovieRequest request, Guid id)
     {
         return new Movie
@@ -53,7 +54,7 @@ public static class ContractMapping
             Total = totalCount
         };
     }
-    
+
     public static IEnumerable<MovieRatingResponse> MapToResponse(this IEnumerable<MovieRating> ratings)
     {
         return ratings.Select(x => new MovieRatingResponse

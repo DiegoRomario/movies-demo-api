@@ -1,9 +1,10 @@
-﻿using Movies.Api.Auth;
-using Movies.Api.Mapping;
-using Movies.Application.Services;
+﻿using Movies.Application.Services;
 using Movies.Contracts.Responses;
+using Movies.Minimal.Api;
+using Movies.Minimal.Api.Auth;
+using Movies.Minimal.Api.Mapping;
 
-namespace Movies.Api.Endpoints.Movies;
+namespace Movies.Minimal.Api.Endpoints.Movies;
 
 public static class GetMovieEndpoint
 {
